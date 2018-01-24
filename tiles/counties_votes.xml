@@ -1,0 +1,48 @@
+<Map background-color="#00000000" 
+     srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+  <Style name="CountyFill">
+    <Rule>
+      <Filter>[differential] = 0 </Filter>
+      <PolygonSymbolizer fill-opacity='1.0' fill="#000000"/>
+      <LineSymbolizer stroke="black" stroke-width=".1"/>
+    </Rule>
+    <Rule>
+      <Filter>[differential] &lt; 0 </Filter>
+      <PolygonSymbolizer fill-opacity='1.0' fill="#d45447"/>
+      <LineSymbolizer stroke="red" stroke-width=".1"/>
+    </Rule>
+
+    <Rule>
+      <ElseFilter/>
+      <PolygonSymbolizer fill-opacity='1.0' fill="#3678a8"/>
+      <LineSymbolizer stroke="blue" stroke-width=".1"/>
+    </Rule>
+  </Style>
+
+  <Style name="CountyLabel">
+    <Rule>
+      <MaxScaleDenominator>4367830</MaxScaleDenominator>
+      <TextSymbolizer size="12" fill="black" 
+	      face-name="DejaVu Sans Bold" halo-fill="#DFDBE3" 
+	      halo-radius="1" wrap-width="20">[name]</TextSymbolizer>
+    </Rule>
+  </Style>
+
+  <Layer name="county" srs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs">
+    <StyleName>CountyFill</StyleName>
+    <StyleName>CountyLabel</StyleName>
+    <Datasource>
+        <Parameter name="type">postgis</Parameter>
+        <Parameter name="host">localhost</Parameter>
+        <Parameter name="dbname">politics</Parameter>
+        <Parameter name="user"></Parameter>      
+        <Parameter name="password"></Parameter>
+        <Parameter name="table">counties</Parameter>
+	<Parameter name="geometry_field">geom</Parameter>
+    </Datasource>
+  </Layer>
+</Map>
+
+
+
+
